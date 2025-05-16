@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       <h1>{hello}</h1>
-      <h2>Database is { dbHealth ? "" : "NOT" } working</h2>
+      <h2 className="font-bold">Database is { dbHealth ? "" : "NOT" } working</h2>
     </>
   )
 }
