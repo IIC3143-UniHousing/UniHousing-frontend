@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { LoginButton } from './components/LoginButton';
 
 function App() {
   const [hello, setHello] = useState<string>('')
@@ -29,6 +30,8 @@ function App() {
     <>
       <h1>{hello}</h1>
       <h2 className="font-bold">Database is { dbHealth ? "" : "NOT" } working</h2>
+      <LoginButton title="Entrar" />
+
     </>
   )
 }
