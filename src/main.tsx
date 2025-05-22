@@ -4,11 +4,14 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 import App from './App.tsx'
 import './index.css'
 
+import CreateHousing from './pages/CreateHousing/CreateHousing.tsx'
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/housing/new" element={<CreateHousing />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
