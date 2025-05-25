@@ -1,11 +1,18 @@
-type TextInputProps = {
+type FormInputProps = {
     name: string,
-    title: string
+    type?: string,
+    title: string,
+    value: string | number,
+    setValue: (data: string, value: any) => void
 }
 
-function TextInput(props: TextInputProps){
+function FormInput(props: FormInputProps){
 
-    const {name, title} = props;
+    const {name, type = "text", value, setValue, title} = props;
+
+    const handleValueChange = (e: { target: { value: any; }; }) => {
+        setValue(name, e.target.value)
+    }
 
     return (
         <div className="block my-5 items-center">
@@ -16,14 +23,16 @@ function TextInput(props: TextInputProps){
                 {title}
             </label>
             <input
-                type="text"
+                type={type}
                 id={name}
                 name={name}
                 placeholder={title}
+                onChange={handleValueChange}
+                value={value}
                 className="w-full p-2 bg-gray-50 font-normal rounded-md border border-gray-500 placeholder:text-gray-500 placeholder:font-bold"
             />
         </div>
     )
 }
 
-export default TextInput;
+export default FormInput;
