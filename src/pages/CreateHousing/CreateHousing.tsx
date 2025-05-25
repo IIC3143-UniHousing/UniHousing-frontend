@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import SimpleViewTitle from "../../components/SimpleViewTitle/SimpleViewTitle";
 import SimpleContainer from "../../components/SimpleContainer/SimpleContainer";
 import SimpleContainerSeparator from "../../components/SimpleContainer/SimpleContainerSeparator";
@@ -7,6 +9,8 @@ import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 
 function CreateHousing(){
+    const [images, setImages] = useState([])
+    
     const submitPreventDefault = (e: { preventDefault: () => void; }) => {
         e.preventDefault()
     }
@@ -36,7 +40,7 @@ function CreateHousing(){
                         <TextInput name="bathrooms" title="Número de Baños" />
                     </SimpleContainerSeparator>
                     <SimpleContainerSeparator title="Imágenes de la propiedad">
-                        <ImageUpload />
+                        <ImageUpload onFilesSelected={setImages} />
                     </SimpleContainerSeparator>
                     <div className="flex align-center justify-center">
                         <PrimaryButton action={submitForm} title="Agregar propiedad"/>
