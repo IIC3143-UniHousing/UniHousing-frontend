@@ -1,7 +1,7 @@
 import { useState, ChangeEvent ,FormEvent } from 'react';
 
-const clientId= process.env.REACT_APP_AUTH0_DOMAIN;
-const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const clientId= import.meta.env.VITE_AUTH0_DOMAIN;
+const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 
 interface SignupFormData {
     email: string;
