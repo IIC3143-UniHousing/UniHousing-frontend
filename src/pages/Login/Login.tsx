@@ -4,7 +4,11 @@ function Login() {
     return (
         <div className="flex h-screen bg-white">
             <div className="w-1/2 flex items-center justify-center px-10 bg-[#F9FAFB]">
-
+            <img
+                src="src/imgs/fondo-login.png"
+                alt="Ilustración de universitarios en una residencia"
+                className="rounded-xl"
+            ></img>
             </div>
             <div className='w-1/2 flex items-center justify-center bg-white rounded-l-3xl shadow-2xl'>
                 <div className='bg-[#F9FAFB] p-10 rounded-xl shadow-md w-full max-w-md'>

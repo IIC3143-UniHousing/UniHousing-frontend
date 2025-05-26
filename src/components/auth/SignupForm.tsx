@@ -98,8 +98,15 @@ const SignupForm = () => {
                         : 'border-gray-300 bg-white'
                     }`}
                     >
-                    <p className="font-semibold">Estudiante</p>
-                    <p className="text-sm text-gray-500">Para estudiantes universitarios que estén buscando una residencia.</p>
+                    <div className='flex items-center gap-3'>
+                        <div className='w-16 h-12 rounded-full bg-blue-100 flex items-center justify-center'>
+                            <img src="src/imgs/student-icon.png" className='w-8 h-8 flex-shrink-0'/>
+                        </div>
+                        <div>
+                            <p className="font-semibold">Estudiante</p>
+                            <p className="text-sm text-gray-500">Para estudiantes universitarios que estén buscando una residencia.</p>
+                        </div>
+                    </div>
                 </button>
                 <button
                     type="button"
@@ -110,8 +117,15 @@ const SignupForm = () => {
                         : 'border-gray-300 bg-white'
                     }`}
                     >
-                    <p className="font-semibold">Propietario</p>
-                    <p className="text-sm text-gray-500">Para propietarios que quieran publicar sus residencias estudiantiles.</p>
+                    <div className='flex items-center gap-3'>
+                        <div className='w-16 h-12 rounded-full bg-blue-100 flex items-center justify-center'>
+                            <img src="src/imgs/renter-icon.png" className='w-8 h-8 flex-shrink-0'/>
+                        </div>
+                        <div>
+                            <p className="font-semibold">Propietario</p>
+                            <p className="text-sm text-gray-500">Para propietarios que quieran publicar sus residencias estudiantiles.</p>
+                        </div>
+                    </div>
                 </button>
             </div>
 

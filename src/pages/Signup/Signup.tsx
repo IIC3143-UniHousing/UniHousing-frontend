@@ -1,13 +1,13 @@
 import { SignupForm } from "../../components/auth";
-
+import { Link } from "react-router";
 function Signup() {
     return (
         <div className="flex h-screen bg-white">
             <div className="w-1/2 flex items-center justify-center px-10 bg-[#F9FAFB]">
                 <div className="max-w-md text-center">
                     <img
-                        src="src/imgs/fondo-signup.jpg"
-                        alt="Imagen de universitaria estudiando"
+                        src="src/imgs/fondo-signup.png"
+                        alt="Ilustración de universitarios estudiando"
                         className="rounded-xl"
                     ></img>
                     <p className="text-lg mb-6 text-gray-700">
@@ -29,6 +29,7 @@ function Signup() {
                         Crea tu cuenta
                     </h2>
                     <SignupForm/>
+                    <p>Ya tienes cuenta?{" "} <Link to='/login' className='hover:text-[#2563EB]'>Ingresa</Link></p>
                 </div>
             </div>
         </div>
