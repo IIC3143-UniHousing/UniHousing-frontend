@@ -1,7 +1,6 @@
-import { useState, ChangeEvent ,FormEvent } from 'react';
+import { useState, type ChangeEvent ,type FormEvent } from 'react';
+import { CustomInput } from '../Input';
 
-const clientId= import.meta.env.VITE_AUTH0_DOMAIN;
-const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 
 interface SignupFormData {
     email: string;
@@ -18,19 +17,23 @@ interface Auth0SignupResponse {
 }
 
 const SignupForm = () => {
-    const [formData, setFormData] = useState<SignFormData>({
+    const [formData, setFormData] = useState<SignupFormData>({
         email: '',
         password: '',
         full_name: '',
-        account_type: '',
+        account_type: false,
     });
 
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({...prev, [name]: value}))
+        if (name === 'account_type'){
+            setFormData((prev) => ({ ...prev, account_type: value === '1', }));
+        } else {
+            setFormData((prev) => ({ ...prev, [name]: value }));
+        }
     };
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -39,65 +42,82 @@ const SignupForm = () => {
         setSuccess(null);
 
         try {
-            const res = await fetch(`https://${domain}/dbconnections/signup`, {
+            const res = await fetch('http://localhost:3000/api/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    client_id: clientId,
-                    email: formData.email,
-                    password: formData.password,
-                    connection: 'Username-Password-Authentication',
-                    user_metadata: {
-                        full_name: formData.full_name,
-                        account_type: formData.account_type,
-                    },
-                }),
+                body: JSON.stringify(formData),
             });
             const data: Auth0SignupResponse = await res.json();
 
             if (res.ok) {
                 setSuccess('Registro Exitoso');
             } else {
-                console.error(data.description || data.error || 'Error al registrarse.');
+                setError(data.description || data.error || 'Error al registrarse.');
             }
         } catch (err) {
-            setError('Error al conectarse con auth0.');
+            setError('Error al conectarse con el servidor.');
         }
     };
     return (
         <form onSubmit={handleSubmit}>
-            <input
-                type='text'
+            <CustomInput
+                type='full_name'
                 name='full_name'
-                placeholder='Nombre Completo'
+                label='Nombre Completo'
+                placeholder='Nombre completo'
                 value={formData.full_name}
                 onChange={handleChange}
                 required
             />
-            <label> Tipo de Cuenta
-            <select name='account_type'>
-                <option value='0'>Estudiante</option>
-                <option value='1'>Propietario</option>
-            </select>
-            </label>
-            <input
+            <CustomInput
                 type='email'
                 name='email'
+                label='Correo electrónico'
                 placeholder='Correo electrónico'
                 value={formData.email}
                 onChange={handleChange}
                 required
-                 className="w-full p-2 bg-gray-50 font-normal rounded-md border border-gray-500 placeholder:text-gray-500 placeholder:font-bold"
             />
-            <input
+            <CustomInput
                 type='password'
                 name='password'
+                label='Contraseña'
                 placeholder='Contraseña'
                 value={formData.password}
                 onChange={handleChange}
                 required
             />
-            <button type='submit'>
+            <label className="block text-sm font-medium text-gray-600 mb-1"> Tipo de Cuenta</label>
+            <div className='flex flex-col gap-1'>
+                <button
+                    type="button"
+                    onClick={() => setFormData((prev) => ({ ...prev, account_type: false }))}
+                    className={`w-full p-4 border rounded-md text-left ${
+                        !formData.account_type
+                        ? 'border-blue-500 bg-blue-50'
+                        : 'border-gray-300 bg-white'
+                    }`}
+                    >
+                    <p className="font-semibold">Estudiante</p>
+                    <p className="text-sm text-gray-500">Para estudiantes universitarios que estén buscando una residencia.</p>
+                </button>
+                <button
+                    type="button"
+                    onClick={() => setFormData((prev) => ({ ...prev, account_type: true }))}
+                    className={`w-full p-4 border rounded-md text-left ${
+                        formData.account_type
+                        ? 'border-blue-500 bg-blue-50'
+                        : 'border-gray-300 bg-white'
+                    }`}
+                    >
+                    <p className="font-semibold">Propietario</p>
+                    <p className="text-sm text-gray-500">Para propietarios que quieran publicar sus residencias estudiantiles.</p>
+                </button>
+            </div>
+
+            {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+            {success && <p className="text-green-600 text-sm mt-2">{success}</p>}
+            <button type='submit' className="w-full mt-4 bg-[#3B82F6] hover:bg-[#2563EB] text-white py-2 rounded-md font-medium">
                 Registrarse
             </button>
         </form>
