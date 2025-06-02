@@ -7,7 +7,27 @@ function PrimaryButton(props: PrimaryButtonProps){
     const {title, action} = props;
 
     return (
-        <button onClick={action} className="py-2 px-5 bg-teal-400 rounded-xl border border-teal-600 text-white font-bold hover:bg-teal-600 active:bg-white active:text-teal-400">{title}</button>
+        <button
+            onClick={action}
+            className="
+                w-full
+                px-3 
+                box-border
+                mt-4 
+                bg-[#3B82F6]
+                text-white
+                hover:bg-[#2563EB] 
+                active:bg-white
+                active:text-[#2563EB]
+                active:border
+                active:border-[#2563EB]
+                py-2
+                rounded-md
+                font-medium
+            "
+        >
+            {title}
+        </button>
     )
 }
 

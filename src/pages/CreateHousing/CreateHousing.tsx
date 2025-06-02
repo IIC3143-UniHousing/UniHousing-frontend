@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type ChangeEvent } from "react";
 import { useNavigate } from "react-router";
 
 import SimpleViewTitle from "../../components/SimpleViewTitle/SimpleViewTitle";
 import SimpleContainer from "../../components/SimpleContainer/SimpleContainer";
 import SimpleContainerSeparator from "../../components/SimpleContainer/SimpleContainerSeparator";
-import FormInput from "../../components/FormInput/FormInput";
+// import CustomInput from "../../components/CustomInput/CustomInput";
 import TextArea from "../../components/TextArea/TextArea";
 import ImageUpload from "../../components/ImageUpload/ImageUpload";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import MessageAlert from "../../components/MessageAlert/MessageAlert";
+import { CustomInput } from "../../components/Input";
 
 import { uploadHousingData } from "../../utils/Housing/uploadHousingData";
 
@@ -26,7 +27,7 @@ type CreateHousingData = {
 function CreateHousing(){
     const navigate = useNavigate();
 
-    const [data, setData] = useState<CreateHousingData | null>(null)
+    const [formData, setFormData] = useState<CreateHousingData | null>(null)
     const [images, setImages] = useState([])
     const [error, setError] = useState<string | null>(null)
 
@@ -41,7 +42,7 @@ function CreateHousing(){
             });
         }
 
-        handleFormChange("images", parsed_images)
+        setFormData((prev) => ({...prev, "images": parsed_images}))
     }, [images])
 
     const convertToBase64 = (file: File): Promise<string> => {
@@ -57,15 +58,13 @@ function CreateHousing(){
         e.preventDefault()
     }
 
-    const handleFormChange = (name: string, value: any) => {
-        setData({
-            ...data,
-            [name]: value
-        })
-    }
+    const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({...prev, [name]: value}))
+    };
 
     const submitForm = async () => {
-        const result = await uploadHousingData(data);
+        const result = await uploadHousingData(formData);
         if (result.success) {
             const housingID = result.result?.housingID
             navigate(`/housing/success?id=${housingID}`)
@@ -75,7 +74,7 @@ function CreateHousing(){
     }
 
     return (
-        <main>
+        <main className="my-6">
             <SimpleViewTitle
                 title={"Agrega una nueva propiedad"} 
                 subtitle={"Rellena los siguientes datos para agregar una propiedad"}
@@ -83,18 +82,69 @@ function CreateHousing(){
             <SimpleContainer>
                 <form action="#" onSubmit={submitPreventDefault}>
                     <SimpleContainerSeparator title="Información básica">
-                        <FormInput name="title" title="Nombre de la propiedad" value={data?.title || ""} setValue={handleFormChange}/>
-                        <FormInput name="price" type="number" title="Precio de alojamiento" value={data?.price || 0} setValue={handleFormChange}/>
-                        <FormInput name="address" title="Dirección" value={data?.address || ""} setValue={handleFormChange} />
-                        <TextArea name="description" title="Descripción" value={data?.description || ""} setValue={handleFormChange}/>
+                        <CustomInput 
+                            name="title" 
+                            label="Nombre de la propiedad"
+                            placeholder="Nombre de la propiedad"
+                            value={formData?.title || ""} 
+                            onChange={handleFormChange}
+                        />
+
+                        <CustomInput 
+                            name="price" 
+                            type="number" 
+                            label="Precio de alojamiento"
+                            placeholder="Precio de alojamiento"
+                            value={formData?.price}
+                            onChange={handleFormChange}
+                        />
+
+                        <CustomInput 
+                            name="address" 
+                            label="Dirección"
+                            placeholder="Dirección"
+                            value={formData?.address || ""} 
+                            onChange={handleFormChange}
+                        />
+                        
+                        <TextArea
+                            name="description"
+                            label="Descripción"
+                            placeholder="Descripción"
+                            value={formData?.description || ""}
+                            onChange={handleFormChange}
+                        />
                     </SimpleContainerSeparator>
                     <SimpleContainerSeparator title="Información de la propiedad">
-                        <FormInput name="size" type="number" title="Tamaño" value={data?.size || ""} setValue={handleFormChange} />
-                        <FormInput name="rooms" type="number" title="Número de Piezas"  value={data?.rooms || 0} setValue={handleFormChange}/>
-                        <FormInput name="bathrooms" type="number" title="Número de Baños" value={data?.bathrooms || 0} setValue={handleFormChange}/>
+                        <CustomInput
+                            name="size"
+                            type="number"
+                            label="Tamaño"
+                            placeholder="Tamaño"
+                            value={formData?.size || ""}
+                            onChange={handleFormChange}
+                        />
+                        <CustomInput
+                            name="rooms"
+                            type="number"
+                            label="Número de Piezas"
+                            placeholder="Número de Piezas"
+                            value={formData?.rooms}
+                            onChange={handleFormChange}
+                        />
+                        <CustomInput
+                            name="bathrooms"
+                            type="number"
+                            label="Número de Baños"
+                            placeholder="Número de Baños"
+                            value={formData?.bathrooms}
+                            onChange={handleFormChange}
+                        />
                     </SimpleContainerSeparator>
                     <SimpleContainerSeparator title="Imágenes de la propiedad">
-                        <ImageUpload onFilesSelected={setImages} />
+                        <ImageUpload
+                            onFilesSelected={setImages}
+                        />
                     </SimpleContainerSeparator>
                     <div className="flex align-center justify-center">
                         <PrimaryButton action={submitForm} title="Agregar propiedad"/>
