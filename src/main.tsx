@@ -10,6 +10,7 @@ import Signup from './pages/Signup/Signup.tsx'
 
 import CreateHousing from './pages/CreateHousing/CreateHousing.tsx'
 import HousingCreatedConfirmation from './pages/HousingCreatedConfirmation/HousingCreatedConfirmation.tsx'
+import ConfirmEmail from './pages/ConfirmEmail/ConfirmEmail.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,8 +19,9 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<App />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/confirm-email" element={<ConfirmEmail />} />
           <Route path="/housing/new" element={<CreateHousing />} />
-        <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
+          <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
         </Routes>
       </BrowserRouter>
   </StrictMode>,
