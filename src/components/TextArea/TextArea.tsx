@@ -1,32 +1,44 @@
 type TextAreaProps = {
     name: string,
-    title: string,
+    label: string,
+    placeholder: string,
     value: string,
-    setValue: (data: string, value: any) => void
+    onChange: any
 }
 
 function TextArea(props: TextAreaProps){
-    const {name, title, value, setValue} = props;
-
-    const handleValueChange = (e: { target: { value: any; }; }) => {
-        setValue(name, e.target.value)
-    }
+    const {name, label, placeholder, value, onChange} = props;
 
     return (
-        <div className="block my-5 items-start"> {/* sm:grid sm:grid-cols-[200px_auto] sm:gap-3 */}
+        <div className="block my-2 items-start"> {/* sm:grid sm:grid-cols-[200px_auto] sm:gap-3 */}
             <label
                 htmlFor={name}
-                className="font-bold block my-2 sm:text-left text-center sm:pt-2 text-sm"
+                className="block text-sm font-medium text-gray-600 mb-1"
             >
-                {title}
+                {label}
             </label>
             <textarea
                 name={name}
                 id={name}
-                placeholder={title}
-                onChange={handleValueChange}
+                placeholder={placeholder}
+                onChange={onChange}
                 value={value}
-                className="w-full min-h-40 p-2 field-sizing-content bg-gray-50 font-normal rounded-md border border-gray-500 placeholder:text-gray-500 placeholder:font-bold"
+                className="
+                    w-full
+                    min-h-40
+                    px-4
+                    py-2
+                    border
+                    border-gray-300
+                    rounded-md
+                    text-gray-900
+                    placeholder-gray-400
+                    field-sizing-content
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-[#3B82F6]
+                    focus:border-transparent'
+                "
             ></textarea>
         </div>
     )
