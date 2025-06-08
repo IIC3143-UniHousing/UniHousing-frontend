@@ -1,6 +1,19 @@
-import axios from "axios";
+import type { HousingData } from '../../types';
 
-export const getHousingById = async (id: string) => {
-    const response = await axios.get(`http://localhost:3000/housing/detail/${id}`);
-    return response.data;
+type ApiResponse = {
+    housing: HousingData;
+};
+
+export const getHousingById = async (id: string): Promise<HousingData> => {
+    try {
+        const response = await fetch(`http://localhost:3000/api/housing/${id}`); // Asegúrate que el puerto es el correcto
+        if (!response.ok) {
+        throw new Error("Propiedad no encontrada");
+        }
+        const data: ApiResponse = await response.json();
+        return data.housing;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 };

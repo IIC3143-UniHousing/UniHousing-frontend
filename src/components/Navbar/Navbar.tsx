@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import logo from '../../imgs/logo_white.png';
+import { removeAccessToken } from "../../utils/auth/auth";
+import { removeUser } from "../../utils/auth/user";
 
 const Navbar = ({ user }) => {
     const location = useLocation();
@@ -13,9 +15,8 @@ const Navbar = ({ user }) => {
     };
 
     const handleLogout = () => {
-        // **TODO**: Hacer Logout
-
-        
+        removeAccessToken(); 
+        removeUser();        
         navigate('/');
     };
 

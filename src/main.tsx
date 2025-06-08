@@ -13,12 +13,14 @@ import Navbar from './components/Navbar/Navbar.tsx'
 import CreateHousing from './pages/CreateHousing/CreateHousing.tsx'
 import HousingCreatedConfirmation from './pages/HousingCreatedConfirmation/HousingCreatedConfirmation.tsx'
 import NotFound from './pages/NotFound/NotFound.tsx'
-import HousingDetail from './pages/HousingDetail/HousingDetail.tsx'
+import HousingDetail from './pages/HousingDetail/HousingDetail.tsx'; 
+
 
 import { useState } from 'react'
+import { getUser } from './utils/auth/user';
 
 const Main = () => {
-  const [user, setUser] = useState<{ type: 'propietario' | 'student' } | null>({ type: 'propietario' });
+  const [user, setUser] = useState(getUser());
 
   return (
     <StrictMode>
@@ -31,7 +33,6 @@ const Main = () => {
           <Route path="/housing/new" element={<CreateHousing />} />
           <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/housing/:id" element={<HousingDetail />} />
         </Routes>
       </BrowserRouter>
     </StrictMode>
