@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/housing/new" element={<CreateHousing />} />
-        <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
+          <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
         </Routes>
       </BrowserRouter>
   </StrictMode>,
