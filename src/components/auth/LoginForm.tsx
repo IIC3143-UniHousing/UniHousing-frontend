@@ -2,10 +2,24 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { CustomInput } from "../Input";
 import { useNavigate } from "react-router";
 import { setAccessToken } from "../../utils/auth/auth";
+import { setUser as persistUser } from '../../utils/auth/user';
+import { useUser } from '../../context/UserContext';
 
 interface LoginFormData {
     email: string;
     password: string;
+}
+
+type UserType = 'estudiante' | 'propietario';
+
+interface User {
+    id: number;
+    auth0Id: string;
+    name: string;
+    email: string;
+    type: UserType;
+    createdAt: string; 
+    housing: any[];  
 }
 
 interface Auth0LoginResponse {
@@ -16,10 +30,12 @@ interface Auth0LoginResponse {
     error?: string;
     error_description?: string;
     description?: string;
+    user?: User;
 }
 
 
 const LoginForm = () => {
+    const { setUser } = useUser();
     const navigate = useNavigate();
     const [formData, setFormData] = useState<LoginFormData>({
         email: '',
@@ -54,6 +70,10 @@ const LoginForm = () => {
                 setSuccess('Inicio de sesión exitoso');
                 if (data.access_token) {
                     setAccessToken(data.access_token);
+                }
+                if (data.user) {
+                    persistUser(data.user);  
+                    setUser(data.user);     
                 }
                 navigate('/')
             } else {

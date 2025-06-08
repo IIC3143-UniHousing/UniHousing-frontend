@@ -1,8 +1,9 @@
 import React from 'react';
 import landingBackground from '../../imgs/landing_background.png'; 
 import landingPicture from '../../imgs/landing-picture.png';
+import { Link } from 'react-router';
 
-const LandingPage = () => {
+const LandingPage = ({ user }) => {
     return (
         <div 
         className="h-[calc(100vh-56px)] bg-cover bg-center" 
@@ -19,6 +20,16 @@ const LandingPage = () => {
                 <p className="text-xl text-gray-700 font-medium">
                 Encuentra la residencia estudiantil perfecta en Santiago de Chile. Explora, compara y contacta directamente con los propietarios. Tu nuevo hogar universitario está a solo un clic de distancia.
                 </p>
+                {!user && (
+                    <Link to="/signup">
+                        <button
+                        type="submit"
+                        className="w-full mt-4 bg-[#3B82F6] hover:bg-[#2563EB] text-white py-2 rounded-md font-medium"
+                        >
+                        Regístrate gratis
+                        </button>
+                    </Link>
+                    )}
             </div>
 
             <div className="md:w-1/2 flex justify-center">

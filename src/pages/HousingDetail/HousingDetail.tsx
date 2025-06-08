@@ -11,31 +11,7 @@ import calidad from "../../imgs/calidad.png";
 import mapa from "../../imgs/mapa.jpg";
 import correo from "../../imgs/correo.png";
 import Review from "../../components/Review/Review";
-
-type OwnerData = {
-  id: number;
-  auth0Id: string;
-  name: string;
-  email: string;
-  type: "estudiante" | "propietario";
-  createdAt: string;
-};
-
-
-type HousingData = {
-    title: string;
-    description: string;
-    address: string;
-    price: number;
-    rooms: number;
-    bathrooms: number;
-    size: number;
-    images: string[];
-    available: boolean;
-    createdAt: string;
-    updatedAt: string;
-    owner: OwnerData;
-};
+import type { HousingData } from '../../types';
 
 function HousingDetail(){
     const { id } = useParams();
@@ -43,62 +19,29 @@ function HousingDetail(){
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
-    useEffect (() => {
-    //const fetchHousingData = async () => {
-        if (!id) return;
-        setLoading(true);
-        setTimeout(() => {
-        if (id === "1") {
-            const fakeData: HousingData = {
-            title: "Pieza en Macul",
-            description: `Se arrienda pieza amplia y luminosa en tranquilo sector residencial de Macul, a pocas cuadras de Av. Vicuña Mackenna y
-              cercana a estaciones de metro, locomoción colectiva, supermercados y universidades. La habitación cuenta con excelente iluminación natural
-              durante gran parte del día, gracias a su ventana de gran tamaño orientada al norte. El inmueble se encuentra dentro de una casa compartida con tres
-              habitaciones en total, dos baños y espacios comunes completamente habilitados: cocina equipada, comedor, lavadora y un pequeño patio ideal para 
-              descansar o estudiar al aire libre. El ambiente es grato y familiar, ideal para estudiantes o jóvenes profesionales que busquen un lugar cómodo 
-              y bien conectado.El valor incluye agua, luz, gas e internet de alta velocidad. Se solicita mes de garantía y contrato mínimo de 6 meses. 
-              No se permiten mascotas. Disponible desde el próximo mes.`,
-            address: "Av. Vicuña Mackenna",
-            price: 250000,
-            rooms: 3,
-            bathrooms: 2,
-            size: 120,
-            images: ["https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/cl/25/86/02/16/25860216_491dda", 
-                "https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/cl/26/52/18/14/26521814_7c7e42", 
-                "https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/cl/30/57/65/62/30576562_584d9b",
-                "https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/cl/25/86/02/16/25860216_491dda", 
-                "https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/cl/26/52/18/14/26521814_7c7e42", 
-                "https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/cl/30/57/65/62/30576562_584d9b",
-                "https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/cl/25/86/02/16/25860216_491dda", 
-                "https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/cl/26/52/18/14/26521814_7c7e42", 
-                "https://photos.encuentra24.com/t_or_fh_m/f_auto/v1/cl/30/57/65/62/30576562_584d9b"
-            ],
-            owner: {
-                    id: 1,
-                    auth0Id: "auth0|fake123",
-                    name: "Juan Pérez",
-                    email: "juan@example.com",
-                    type: "propietario",
-                    createdAt: "2024-01-01T00:00:00.000Z"
-                },
-            available: true,
-            createdAt: "2024-06-01T10:00:00.000Z",
-            updatedAt: "2024-06-04T15:30:00.000Z",
-        };
-        //try {
-            //const housingData = await getHousingById(id);
-            //setData(housingData);
-            setData(fakeData);
-        } else {
-        setError("No se encontró la propiedad");}
-        //} catch (e) {
-            //console.error(e);
-            //setError("Error al cargar la propiedad")
-        //} finally {
+    useEffect(() => {
+        const fetchHousingData = async () => {
+            if (!id) {
+            setError("ID de propiedad no especificado.");
             setLoading(false);
-        //}
-    }, 1500);
-    //fetchHousingData();
+            return;
+            }
+            
+            setLoading(true);
+            setError(null);
+
+            try {
+            const housingData = await getHousingById(id);
+            setData(housingData);
+            } catch (e) {
+            console.error(e);
+            setError("Error al cargar la propiedad. Es posible que no exista.");
+            } finally {
+            setLoading(false);
+            }
+        };
+
+        fetchHousingData();
     }, [id]);
 
     if (loading) return <p className="text-center">Cargando propiedad...</p>;

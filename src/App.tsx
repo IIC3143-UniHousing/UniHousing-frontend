@@ -1,9 +1,9 @@
-import LandingPage from './pages/LandingPage/LandingPage'
+import LandingPage from './pages/LandingPage/LandingPage';
+import { useUser } from './context/UserContext';
 
 function App() {
-  return (
-    <LandingPage />
-  )
+  const { user } = useUser();
+  return <LandingPage user={user} />;
 }
 
-export default App
+export default App;
