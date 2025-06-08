@@ -66,7 +66,7 @@ function CreateHousing(){
     const submitForm = async () => {
         const result = await uploadHousingData(formData);
         if (result.success) {
-            const housingID = result.result?.housingID
+            const housingID = result.result?.housing?.id;
             navigate(`/housing/success?id=${housingID}`)
         } else {
             setError(result.message || "")
