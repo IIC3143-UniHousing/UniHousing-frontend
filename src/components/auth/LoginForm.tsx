@@ -1,6 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { CustomInput } from "../Input";
-
+import { useNavigate } from "react-router";
+import { setAccessToken } from "../../utils/auth/auth";
 
 interface LoginFormData {
     email: string;
@@ -13,11 +14,13 @@ interface Auth0LoginResponse {
     token_type?: string;
     expires_in?: number;
     error?: string;
+    error_description?: string;
     description?: string;
 }
 
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState<LoginFormData>({
         email: '',
         password: '',
@@ -37,7 +40,7 @@ const LoginForm = () => {
         setSuccess(null);
 
         try {
-            const res = await fetch('http://localhost:3000/api/login', {
+            const res = await fetch('http://localhost:3000/api/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -49,8 +52,12 @@ const LoginForm = () => {
             const data: Auth0LoginResponse = await res.json();
             if (res.ok) {
                 setSuccess('Inicio de sesión exitoso');
+                if (data.access_token) {
+                    setAccessToken(data.access_token);
+                }
+                navigate('/')
             } else {
-                setError(data.description || data.error || 'Error al iniciar sesión.');
+                setError(data.error || 'Error al iniciar sesión.');
             }
         } catch (err) {
             setError('Error al conectarse con el servidor.');
