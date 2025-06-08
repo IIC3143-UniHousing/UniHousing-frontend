@@ -21,7 +21,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/login" element={<Login />} />
           <Route path="/housing/new" element={<CreateHousing />} />
           <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
-          <Route path="/housing/detail/:id" element={<HousingDetail />} />
+          <Route path="/housing/:id" element={<HousingDetail />} />
         </Routes>
       </BrowserRouter>
   </StrictMode>,
