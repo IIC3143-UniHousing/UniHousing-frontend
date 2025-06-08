@@ -14,23 +14,29 @@ import HousingDetail from './pages/HousingDetail/HousingDetail.tsx';
 import Navbar from './components/Navbar/Navbar.tsx';
 
 import { UserProvider, useUser } from './context/UserContext';
+import { useState } from 'react'
+import HousingListPage from './pages/HousingList/housingList.tsx'
+
 
 const Main = () => {
   const { user } = useUser();
 
   return (
+
     <>
       <Navbar user={user} />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/housings/" element={<HousingListPage />} />
         <Route path="/housing/new" element={<CreateHousing />} />
         <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
         <Route path="/housing/:id" element={<HousingDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
+
   );
 };
 
