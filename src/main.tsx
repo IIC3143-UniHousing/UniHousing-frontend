@@ -16,6 +16,7 @@ import NotFound from './pages/NotFound/NotFound.tsx'
 import HousingDetail from './pages/HousingDetail/HousingDetail.tsx'
 
 import { useState } from 'react'
+import HousingListPage from './pages/HousingList/housingList.tsx'
 
 const Main = () => {
   const [user, setUser] = useState<{ type: 'propietario' | 'student' } | null>({ type: 'propietario' });
@@ -32,6 +33,7 @@ const Main = () => {
           <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/housing/:id" element={<HousingDetail />} />
+          <Route path="/housings/" element={<HousingListPage />} />
         </Routes>
       </BrowserRouter>
     </StrictMode>
