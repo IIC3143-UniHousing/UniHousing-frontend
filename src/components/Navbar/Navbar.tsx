@@ -3,10 +3,12 @@ import { Link, useLocation, useNavigate } from 'react-router';
 import logo from '../../imgs/logo_white.png';
 import { removeAccessToken } from "../../utils/auth/auth";
 import { removeUser } from "../../utils/auth/user";
+import { useUser } from '../../context/UserContext'
 
 const Navbar = ({ user }) => {
     const location = useLocation();
     const navigate = useNavigate();
+    const { setUser } = useUser();
 
     const linkStyle = (path) => {
         return location.pathname === path
@@ -16,7 +18,8 @@ const Navbar = ({ user }) => {
 
     const handleLogout = () => {
         removeAccessToken(); 
-        removeUser();        
+        removeUser(); 
+        setUser(null);        
         navigate('/');
     };
 

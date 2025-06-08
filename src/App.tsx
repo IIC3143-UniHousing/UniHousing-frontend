@@ -1,12 +1,9 @@
-import LandingPage from './pages/LandingPage/LandingPage'
-import { getUser } from './utils/auth/user';
-import { useState } from 'react'
+import LandingPage from './pages/LandingPage/LandingPage';
+import { useUser } from './context/UserContext';
 
 function App() {
-  const [user, setUser] = useState(getUser());
-  return (
-    <LandingPage user={user}/>
-  )
+  const { user } = useUser();
+  return <LandingPage user={user} />;
 }
 
-export default App
+export default App;
