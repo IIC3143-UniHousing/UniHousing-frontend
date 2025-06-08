@@ -12,10 +12,10 @@ import Navbar from './components/Navbar/Navbar.tsx'
 
 import CreateHousing from './pages/CreateHousing/CreateHousing.tsx'
 import HousingCreatedConfirmation from './pages/HousingCreatedConfirmation/HousingCreatedConfirmation.tsx'
+import NotFound from './pages/NotFound/NotFound.tsx'
 import HousingDetail from './pages/HousingDetail/HousingDetail.tsx'
 
 import { useState } from 'react'
-const Residencias = () => <div className="p-8 text-xl">Página para ver todas las residencias.</div>;
 
 const Main = () => {
   const [user, setUser] = useState<{ type: 'propietario' | 'student' } | null>({ type: 'propietario' });
@@ -30,6 +30,7 @@ const Main = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/housing/new" element={<CreateHousing />} />
           <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
+          <Route path="*" element={<NotFound />} />
           <Route path="/housing/:id" element={<HousingDetail />} />
         </Routes>
       </BrowserRouter>
