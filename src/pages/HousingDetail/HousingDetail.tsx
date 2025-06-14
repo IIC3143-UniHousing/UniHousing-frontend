@@ -8,7 +8,7 @@ import cama from "../../imgs/cama.png";
 import tamano from "../../imgs/tamano.png";
 import direccion from "../../imgs/direccion.png";
 import calidad from "../../imgs/calidad.png";
-import mapa from "../../imgs/mapa.jpg";
+import OpenStreetMap from "../../components/OpenStreetMap/OpenStreetMap";
 import correo from "../../imgs/correo.png";
 import Review from "../../components/Review/Review";
 import type { HousingData } from '../../types';
@@ -111,11 +111,13 @@ function HousingDetail(){
                             <p className="text-gray-700">{data.description}</p>
                         </div>
                         {/* Sección mapa */}
-                        <div className="p-4 rounded-lg">
-                            <p className="text-2xl text-black font-medium mb-2">Mapa</p>
-                            <div className="w-full h-0.5 bg-blue-500 mt-1 mb-3"></div>
-                            <img src={mapa} className="w-full h-full object-cover"></img>
-                        </div>
+                        {data.latitude && data.longitude && (
+                        <OpenStreetMap
+                            lat={data.latitude}
+                            lon={data.longitude}
+                            address={data.address}
+                        />
+                        )}
                         {/* Sección reseñas */}
                         <div className="p-4 rounded-lg w-full">
                             <p className="text-2xl text-black font-medium mb-2">Reseñas</p>
