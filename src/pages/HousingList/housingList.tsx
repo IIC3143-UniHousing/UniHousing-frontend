@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import HousingList from '../../components/HousingList/HousingList';
 import { getAllHousings } from '../../utils/Housing/getAllHousings';
 import type { HousingData } from '../../types';
-
+import SearchFilter from '../../components/SearchFilter/SearchFilter';
 const itemsPerPage = 5;
 
 const HousingListPage = () => {
@@ -54,6 +54,7 @@ const HousingListPage = () => {
 
   return (
     <div className="bg-blue-50 min-h-screen p-6">
+      <SearchFilter/>
       <h1 className="text-3xl font-bold text-blue-800 mb-6 text-center">
         Propiedades disponibles
       </h1>
