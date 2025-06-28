@@ -10,7 +10,6 @@ function HousingCreatedConfirmation(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log('housingID', housingID); 
         if (!housingID) {
             navigate('/', { replace: true });
         }
