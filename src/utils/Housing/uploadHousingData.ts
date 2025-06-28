@@ -61,7 +61,6 @@ export const uploadHousingData = async (data: any | null) : Promise<UploadResult
     }
 
     const user = getUser();
-    console.log(user)
     data.ownerId = user?.id;
 
     try{
