@@ -1,5 +1,6 @@
 import { useState, useEffect, type ChangeEvent } from "react";
 import { useNavigate } from "react-router";
+import { getUser } from "../../utils/auth/user";
 
 import SimpleViewTitle from "../../components/SimpleViewTitle/SimpleViewTitle";
 import SimpleContainer from "../../components/SimpleContainer/SimpleContainer";
@@ -26,10 +27,19 @@ type CreateHousingData = {
 
 function CreateHousing(){
     const navigate = useNavigate();
+    
+    const user = getUser()
 
     const [formData, setFormData] = useState<CreateHousingData | null>(null)
     const [images, setImages] = useState([])
     const [error, setError] = useState<string | null>(null)
+    const [submitClicked, setSubmitClicked] = useState(false)
+
+    useEffect(() => {
+        if (!user || user.type != 'propietario') {
+            navigate('/', { replace: true });
+        }
+    }, [user]);
 
     useEffect(() => {
         const parsed_images: any = []
@@ -64,12 +74,14 @@ function CreateHousing(){
     };
 
     const submitForm = async () => {
+        setSubmitClicked(true)
         const result = await uploadHousingData(formData);
         if (result.success) {
             const housingID = result.result?.housing?.id;
             navigate(`/housing/success?id=${housingID}`)
         } else {
             setError(result.message || "")
+            setSubmitClicked(false)
         }
     }
 
@@ -119,8 +131,8 @@ function CreateHousing(){
                         <CustomInput
                             name="size"
                             type="number"
-                            label="Tamaño"
-                            placeholder="Tamaño"
+                            label="Tamaño (en Metros Cuadrados)"
+                            placeholder="Tamaño en m²"
                             value={formData?.size || ""}
                             onChange={handleFormChange}
                         />
@@ -147,7 +159,7 @@ function CreateHousing(){
                         />
                     </SimpleContainerSeparator>
                     <div className="flex align-center justify-center">
-                        <PrimaryButton action={submitForm} title="Agregar propiedad"/>
+                        <PrimaryButton action={submitForm} disabled={submitClicked} title="Agregar propiedad"/>
                     </div>
                 </form>
             </SimpleContainer>

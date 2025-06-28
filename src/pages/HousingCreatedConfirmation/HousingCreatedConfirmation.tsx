@@ -1,20 +1,33 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
+import { getUser } from "../../utils/auth/user";
 
 import SimpleViewTitle from "../../components/SimpleViewTitle/SimpleViewTitle";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
+
+import { getIfHousingWasRecentlyCreated } from "../../utils/Housing/getIfRecentHousing";
 
 function HousingCreatedConfirmation(){
     const params = new URLSearchParams(useLocation().search)
     const housingID = params.get('id')
     const navigate = useNavigate();
 
+    const user = getUser()
+
     useEffect(() => {
-        console.log('housingID', housingID); 
-        if (!housingID) {
+        if (!housingID || !user || user.type != 'propietario') {
             navigate('/', { replace: true });
         }
-    }, [housingID, navigate]);
+        const fetchHousingData = async () => {
+            console.log(housingID)
+            const isRecent = await getIfHousingWasRecentlyCreated(Number(housingID));
+            if(!isRecent){
+                navigate('/', { replace: true });
+            }
+        }
+
+        fetchHousingData()
+    }, [housingID]);
 
     const goToPropertyPage = () => {
         navigate(`/housing/${housingID}`)
