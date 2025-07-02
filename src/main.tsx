@@ -16,6 +16,8 @@ import Navbar from './components/Navbar/Navbar.tsx';
 import { UserProvider, useUser } from './context/UserContext';
 import { useState } from 'react'
 import HousingListPage from './pages/HousingList/housingList.tsx'
+import MyPropertiesPage from './pages/MyProperties/MyProperties.tsx';
+
 
 
 const Main = () => {
@@ -33,6 +35,7 @@ const Main = () => {
         <Route path="/housing/new" element={<CreateHousing />} />
         <Route path="/housing/success" element={<HousingCreatedConfirmation />} />
         <Route path="/housing/:id" element={<HousingDetail />} />
+        <Route path="/my-housings" element={<MyPropertiesPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
