@@ -4,8 +4,8 @@ import ImageUploadFile from "./ImageUploadFile";
 import image_icon from "../../assets/images/image_icon.svg"
 
 // Basado en https://medium.com/@dprincecoder/creating-a-drag-and-drop-file-upload-component-in-react-a-step-by-step-guide-4d93b6cc21e0
-function ImageUpload({onFilesSelected} : {onFilesSelected: any}){
-    const [images, setImages] = useState<any>([])
+function ImageUpload({prevImages, onFilesSelected} : {prevImages?: any, onFilesSelected: any}){
+    const [images, setImages] = useState<any>(prevImages || [])
 
     const filesInput = useRef<HTMLInputElement | null>(null)
 

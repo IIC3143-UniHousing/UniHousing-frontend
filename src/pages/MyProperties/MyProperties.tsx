@@ -3,7 +3,7 @@ import { useUser } from '../../context/UserContext';
 import { getAllHousings } from '../../utils/Housing/getAllHousings';
 import { updateAvailableHousing } from '../../utils/Housing/updateAvailableHousing';
 import type { HousingData } from '../../types';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 
 const MyPropertiesPage = () => {
   const [allHousings, setAllHousings] = useState<HousingData[]>([]);
@@ -88,24 +88,32 @@ const MyPropertiesPage = () => {
                   <p className="text-gray-500 mt-1">{housing.address}</p>
                 </div>
 
-                <div className="flex flex-col items-center justify-center w-40 flex-shrink-0 space-y-2">
-                  <label htmlFor={`toggle-${housing.id}`} className="flex items-center cursor-pointer">
-                    <div className="relative">
-                      <input
-                        id={`toggle-${housing.id}`}
-                        type="checkbox"
-                        className="sr-only peer"
-                        checked={housing.available}
-                        readOnly
-                        onClick={() => handleToggleAvailability(housing)}
-                      />
-                      <div className="block w-14 h-8 rounded-full bg-gray-300 peer-checked:bg-blue-500 transition"></div>
-                      <div className="absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform transform peer-checked:translate-x-full"></div>
-                    </div>
-                  </label>
-                  <span className={`font-medium text-sm ${housing.available ? 'text-blue-600' : 'text-gray-500'}`}>
-                    {housing.available ? 'Disponible' : 'No Disponible'}
-                  </span>
+                <div>
+
+                  <div className="flex flex-col items-center justify-center w-40 flex-shrink-0 space-y-2">
+                    <label htmlFor={`toggle-${housing.id}`} className="flex items-center cursor-pointer">
+                      <div className="relative">
+                        <input
+                          id={`toggle-${housing.id}`}
+                          type="checkbox"
+                          className="sr-only peer"
+                          checked={housing.available}
+                          readOnly
+                          onClick={() => handleToggleAvailability(housing)}
+                        />
+                        <div className="block w-14 h-8 rounded-full bg-gray-300 peer-checked:bg-blue-500 transition"></div>
+                        <div className="absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform transform peer-checked:translate-x-full"></div>
+                      </div>
+                    </label>
+                    <span className={`font-medium text-sm ${housing.available ? 'text-blue-600' : 'text-gray-500'}`}>
+                      {housing.available ? 'Disponible' : 'No Disponible'}
+                    </span>
+                  </div>
+
+                  <Link to={`/housing/${housing.id}/edit`} className="block w-full text-center mt-4 bg-[#3B82F6] hover:bg-[#2563EB] text-white py-2 rounded-md font-medium">
+                    Editar
+                  </Link>
+
                 </div>
               </div>
             ))}
