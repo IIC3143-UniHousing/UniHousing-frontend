@@ -35,9 +35,14 @@ const Navbar = ({ user }) => {
             </Link>
             
             {user && user.type === 'propietario' && (
-            <Link to="/housing/new" className={`text-white px-3 py-2 text-sm font-medium ${linkStyle('/crear-residencia')}`}>
-                Crear Residencia
-            </Link>
+            <>
+                <Link to="/my-housings" className={`text-white px-3 py-2 text-sm font-medium ${linkStyle('/mis-propiedades')}`}>
+                    Mis Propiedades
+                </Link>
+                <Link to="/housing/new" className={`text-white px-3 py-2 text-sm font-medium ${linkStyle('/housing/new')}`}>
+                    Crear Residencia
+                </Link>
+            </>
             )}
 
             {user && (
