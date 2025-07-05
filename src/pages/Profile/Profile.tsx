@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getUserData, updateUserData } from '../../utils/auth/userdata';
+import studentImg from '../../imgs/student.png';
+import landlordImg from '../../imgs/landlord.png';
+import defaultImg from '../../imgs/user.png';
 
 function Profile() {
   const [user, setUser] = useState<{ name: string; email: string; type?: string } | null>(null);
@@ -51,11 +54,22 @@ function Profile() {
           </div>
         )}
         <div className="flex flex-col items-center">
-          <img
-            src="/default-profile.png"
-            alt="Foto de perfil"
-            className="w-44 h-44 rounded-full object-cover border border-gray-300"
-          />
+          <div className="w-44 h-44 rounded-full overflow-hidden border border-gray-300 bg-white flex items-center justify-center">
+            <img
+              src={
+                user?.type === "estudiante"
+                  ? studentImg
+                  : user?.type === "propietario"
+                  ? landlordImg
+                  : defaultImg
+              }
+              alt="Foto de perfil"
+              className={`w-full h-full object-contain object-center 
+                ${user?.type === "propietario" ? "scale-70" : ""}
+                ${user?.type === "estudiante" ? "scale-90" : ""}
+              `}
+            />
+          </div>
           {user?.type && (
             <span className="mt-4 text-sm font-semibold bg-blue-600 text-white px-3 py-1 rounded-full capitalize">
               {user.type}
