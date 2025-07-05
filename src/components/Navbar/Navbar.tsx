@@ -46,6 +46,12 @@ const Navbar = ({ user }) => {
                 </Link>
             )}
 
+            {user && (
+                <Link to="/profile" className={`text-white px-3 py-2 text-sm font-medium ${linkStyle('/users/me')}`}>
+                    Mi perfil
+                </Link>
+            )}
+
             {user ? (
                 <button 
                     onClick={handleLogout}
