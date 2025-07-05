@@ -12,6 +12,7 @@ import HousingCreatedConfirmation from './pages/HousingCreatedConfirmation/Housi
 import NotFound from './pages/NotFound/NotFound.tsx';
 import HousingDetail from './pages/HousingDetail/HousingDetail.tsx';
 import Navbar from './components/Navbar/Navbar.tsx';
+import Profile from './pages/Profile/Profile.tsx';
 
 import { UserProvider, useUser } from './context/UserContext';
 import { useState } from 'react'
@@ -38,6 +39,7 @@ const Main = () => {
         <Route path="/my-housings" element={<MyPropertiesPage />} />
         <Route path="/housing/:id/edit" element={<DashboardHousing />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </>
 
