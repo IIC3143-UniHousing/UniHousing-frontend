@@ -23,3 +23,9 @@ export type HousingData = {
   owner: OwnerData;
   ownerId: number;
 };
+
+export type Filter = {
+    priceMin: number | undefined;
+    priceMax: number | undefined;
+    rooms: number | null;
+};
