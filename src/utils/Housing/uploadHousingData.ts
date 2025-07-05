@@ -1,6 +1,5 @@
 import { getAccessToken } from "../../utils/auth/auth";
 import { getUser } from "../auth/user";
-const BASE_URL = "http://localhost:3000"
 
 type UploadSuccess = { success: true; result?: any };
 type UploadError = { success: false; message?: string };
@@ -64,7 +63,7 @@ export const uploadHousingData = async (data: any | null) : Promise<UploadResult
     data.ownerId = user?.id;
 
     try{
-        const response = await fetch(`${BASE_URL}/api/housing`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/housing`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

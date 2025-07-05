@@ -1,6 +1,5 @@
 import { getAccessToken } from "../../utils/auth/auth";
 import { getUser } from "../auth/user";
-const BASE_URL = "http://localhost:3000"
 
 export const deleteHousing = async (id: number) => {
     const token = getAccessToken();
@@ -15,7 +14,7 @@ export const deleteHousing = async (id: number) => {
     }
 
     try{
-        const response = await fetch(`${BASE_URL}/api/housing/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/housing/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

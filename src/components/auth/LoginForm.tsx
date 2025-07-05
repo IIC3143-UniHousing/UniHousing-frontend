@@ -56,7 +56,7 @@ const LoginForm = () => {
         setSuccess(null);
 
         try {
-            const res = await fetch('http://localhost:3000/api/users/login', {
+            const res = await fetch(`${import.meta.env.VITE_BASE_URL}/users/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -80,6 +80,7 @@ const LoginForm = () => {
                 setError(data.error || 'Error al iniciar sesión.');
             }
         } catch (err) {
+            console.log(err);
             setError('Error al conectarse con el servidor.');
         }
     };

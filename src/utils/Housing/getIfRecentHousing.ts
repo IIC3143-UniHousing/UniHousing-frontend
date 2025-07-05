@@ -1,13 +1,12 @@
 import { getAccessToken } from "../../utils/auth/auth";
-const BASE_URL = "http://localhost:3000"
 
 export const getIfHousingWasRecentlyCreated = async ( id: number ) => {
     const token = getAccessToken();
 
-    console.log(`${BASE_URL}/api/housing/${id}/recent`)
+    console.log(`${import.meta.env.VITE_BASE_URL}/api/housing/${id}/recent`)
 
     try {
-        const response = await fetch(`${BASE_URL}/api/housing/${id}/recent`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/housing/${id}/recent`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
