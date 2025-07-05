@@ -36,11 +36,16 @@ const Navbar = ({ user }) => {
                 setDropdownOpen(false);
             }
         };
+        
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [dropdownRef]);
+
+    useEffect(() => {
+        setDropdownOpen(false);
+    }, [user]);
 
     return (
         <nav className="bg-[#3B82F6] py-2 px-4 flex justify-between items-center">
