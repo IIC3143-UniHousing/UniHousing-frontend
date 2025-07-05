@@ -21,6 +21,7 @@ export type HousingData = {
   createdAt: string;
   updatedAt: string;
   owner: OwnerData;
+  ownerId: number;
 };
 
 export type Filter = {
