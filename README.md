@@ -21,7 +21,6 @@ npm install
 
 3. Configurar variables de entorno:
 Crear archivo `.env` y copiar las variables del archivo `.env.example`
-```
 
 ## Desarrollo
 
