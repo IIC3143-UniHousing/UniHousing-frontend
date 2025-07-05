@@ -6,11 +6,15 @@ function ImageUploadFile({image, removeImage}: {image: any, removeImage: any}){
     const [imagePreview, setImagePreview] = useState<any>()
 
     useEffect(() => {
-        const imageUrl = URL.createObjectURL(image);
-        setImagePreview(imageUrl)
-        return () => {
-            URL.revokeObjectURL(imageUrl);
-        };
+        if(typeof image === "string"){
+            setImagePreview(image)
+        }else{
+            const imageUrl = URL.createObjectURL(image);
+            setImagePreview(imageUrl)
+            return () => {
+                URL.revokeObjectURL(imageUrl);
+            };
+        }
     }, [image]);
 
 
