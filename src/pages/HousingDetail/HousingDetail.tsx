@@ -164,11 +164,10 @@ function HousingDetail() {
                         </div>
                     </div>
                 </div>
-
                 {/* Tarjeta contacto */}
                 <div className="col-span-1 flex justify-center items-start">
                     <div className="sticky top-6 w-full">
-                        <div className="p-4 rounded-lg shadow bg-blue-300 animate-bounce">
+                        <div className="p-4 rounded-lg shadow bg-blue-300">
                             <p className="text-xl text-center font-semibold text-black mb-1">Contacta a:</p>
                             <p className="text-xl text-center font-bold text-black mb-2">{data.owner.name}</p>
                             <div className="flex justify-center items-center gap-2">
