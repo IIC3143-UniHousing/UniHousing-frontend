@@ -2,7 +2,7 @@ import { getAccessToken } from "../auth/auth";
 
 export const listReviews = async (housingId: string) => {
     const token = getAccessToken();
-    const res = await fetch(`http://localhost:3000/api/reviews?housingId=${housingId}`, {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/reviews?housingId=${housingId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -1,0 +1,17 @@
+{
+  "id": 123,
+  "title": "Sample Housing",
+  "price": 400000,
+  "address": "Fake Street 123",
+  "description": "This is a sample property used for testing.",
+  "size": 70,
+  "rooms": 3,
+  "bathrooms": 2,
+  "images": ["data:image/jpeg;base64,sampleBase64Image=="],
+  "available": true,
+  "owner": {
+    "id": 1,
+    "name": "Test Propietario",
+    "email": "propietario@example.com"
+  }
+}

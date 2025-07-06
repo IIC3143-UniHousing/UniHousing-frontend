@@ -9,7 +9,7 @@ export const getHousingById = async (id: string): Promise<HousingData> => {
     const token = getAccessToken();
 
     try {
-        const response = await fetch(`http://localhost:3000/api/housing/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/housing/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
