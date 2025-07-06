@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import HousingList from '../../components/HousingList/HousingList';
 import { getAllHousings } from '../../utils/Housing/getAllHousings';
 import type { HousingData, Filter } from '../../types';
@@ -10,7 +10,7 @@ const HousingListPage = () => {
   const [housings, setHousings] = useState<HousingData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [filters, setFilters] = useState<Filter>({});
+  const [filters, setFilters] = useState<Filter>({priceMin: undefined, priceMax: undefined, rooms: null});
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -116,7 +116,7 @@ const HousingListPage = () => {
               Intenta ajustar los filtros para ver más resultados.
             </p>
             <button
-              onClick={() => setFilters({})}
+              onClick={() => setFilters({priceMin: undefined, priceMax: undefined, rooms: null})}
               className="px-4 py-2 bg-blue-600 text-white rounded-xl disabled:opacity-50"
             >
                 Limpiar Filtros
