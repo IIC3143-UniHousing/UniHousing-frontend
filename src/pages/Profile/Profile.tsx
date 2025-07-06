@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getUserData, updateUserData } from '../../utils/auth/userdata';
 import studentImg from '../../imgs/student.png';
 import landlordImg from '../../imgs/landlord.png';

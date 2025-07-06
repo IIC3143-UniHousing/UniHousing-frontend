@@ -1,9 +1,8 @@
-import React from 'react';
 import landingBackground from '../../imgs/landing_background.png'; 
 import landingPicture from '../../imgs/landing-picture.png';
 import { Link } from 'react-router';
 
-const LandingPage = ({ user }) => {
+const LandingPage = ({ user }: { user: any }) => {
     return (
         <div 
         className="h-[calc(100vh-56px)] bg-cover bg-center" 

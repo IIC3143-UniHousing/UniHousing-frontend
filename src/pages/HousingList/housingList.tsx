@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import HousingList from '../../components/HousingList/HousingList';
 import { getAllHousings } from '../../utils/Housing/getAllHousings';
 import type { HousingData, Filter } from '../../types';

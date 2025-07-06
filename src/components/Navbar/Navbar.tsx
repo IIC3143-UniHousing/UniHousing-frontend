@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import logo from '../../imgs/logo_white.png';
 import { removeAccessToken } from "../../utils/auth/auth";
@@ -6,14 +6,14 @@ import { removeUser } from "../../utils/auth/user";
 import { useUser } from '../../context/UserContext'
 import userIcon from '../../imgs/user.png'
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user }: { user: any }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const { setUser } = useUser();
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const linkStyle = (path) => {
+    const linkStyle = (path: any) => {
         return location.pathname === path
         ? 'border-b-2 border-white'
         : 'border-b-2 border-transparent';
@@ -31,7 +31,7 @@ const Navbar = ({ user }) => {
     };
 
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (event: any) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
                 setDropdownOpen(false);
             }

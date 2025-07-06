@@ -1,7 +1,6 @@
-import React from 'react';
 import { useNavigate } from 'react-router';
 
-const HousingCard = ({ id, title, owner, price, comuna, rooms, images }) => {
+const HousingCard = ({ id, title, owner, price, rooms, images }: { id: any, title: any, owner: any, price: any, comuna: any, rooms: any, images: any }) => {
     const navigate = useNavigate();
 
     const handleCardClick = () => {

@@ -15,7 +15,6 @@ import Navbar from './components/Navbar/Navbar.tsx';
 import Profile from './pages/Profile/Profile.tsx';
 
 import { UserProvider, useUser } from './context/UserContext';
-import { useState } from 'react'
 import HousingListPage from './pages/HousingList/housingList.tsx'
 import MyPropertiesPage from './pages/MyProperties/MyProperties.tsx';
 import DashboardHousing from './pages/DashboardHousing/DashboardHousing.tsx';

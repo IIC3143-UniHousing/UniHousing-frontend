@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useUser } from '../../context/UserContext';
 import { getAllHousings } from '../../utils/Housing/getAllHousings';
 import { updateAvailableHousing } from '../../utils/Housing/updateAvailableHousing';
