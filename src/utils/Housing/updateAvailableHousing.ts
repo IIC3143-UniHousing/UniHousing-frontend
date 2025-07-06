@@ -9,14 +9,11 @@ export const updateAvailableHousing = async (
     const token = getAccessToken();
     const url = `http://localhost:3000/api/housing/${housing.id}`;
 
-    const payload = { ...housing };
+    const { id, createdAt, updatedAt, owner, ...house } = housing;
+
+    const payload = { ...house };
 
     payload.available = newAvailability;
-
-    delete payload.id;
-    delete payload.createdAt;
-    delete payload.updatedAt;
-    delete payload.owner;
 
     try {
         const response = await fetch(url, {
