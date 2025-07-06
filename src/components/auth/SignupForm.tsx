@@ -1,5 +1,7 @@
 import { useState, type ChangeEvent ,type FormEvent } from 'react';
 import { CustomInput } from '../Input';
+import StudentIcon from '../../imgs/student-icon.png';
+import RenterIcon from '../../imgs/renter-icon.png';
 
 
 interface SignupFormData {
@@ -97,7 +99,7 @@ const SignupForm = () => {
                     >
                     <div className='flex items-center gap-3'>
                         <div className='w-16 h-12 rounded-full bg-blue-100 flex items-center justify-center'>
-                            <img src="src/imgs/student-icon.png" className='w-8 h-8 flex-shrink-0'/>
+                            <img src={StudentIcon} className='w-8 h-8 flex-shrink-0'/>
                         </div>
                         <div>
                             <p className="font-semibold">Estudiante</p>
@@ -116,7 +118,7 @@ const SignupForm = () => {
                     >
                     <div className='flex items-center gap-3'>
                         <div className='w-16 h-12 rounded-full bg-blue-100 flex items-center justify-center'>
-                            <img src="src/imgs/renter-icon.png" className='w-8 h-8 flex-shrink-0'/>
+                            <img src={RenterIcon} className='w-8 h-8 flex-shrink-0'/>
                         </div>
                         <div>
                             <p className="font-semibold">Propietario</p>
