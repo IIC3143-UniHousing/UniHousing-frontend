@@ -1,11 +1,13 @@
 import { LoginForm } from '../../components/auth';
 import { Link } from 'react-router';
+import LoginIcon from '../../imgs/fondo-login.png';
+
 function Login() {
     return (
         <div className="flex h-screen bg-white">
             <div className="w-1/2 flex items-center justify-center px-10 bg-[#F9FAFB]">
             <img
-                src="src/imgs/fondo-login.png"
+                src={LoginIcon}
                 alt="Ilustración de universitarios en una residencia"
                 className="rounded-xl"
             ></img>

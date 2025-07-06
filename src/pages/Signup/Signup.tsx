@@ -1,12 +1,14 @@
 import { SignupForm } from "../../components/auth";
 import { Link } from "react-router";
+import SignupIcon from '../../imgs/fondo-signup.png'
+
 function Signup() {
     return (
         <div className="flex h-screen bg-white">
             <div className="w-1/2 flex items-center justify-center px-10 bg-[#F9FAFB]">
                 <div className="max-w-md text-center">
                     <img
-                        src="src/imgs/fondo-signup.png"
+                        src={SignupIcon}
                         alt="Ilustración de universitarios estudiando"
                         className="rounded-xl"
                     ></img>
