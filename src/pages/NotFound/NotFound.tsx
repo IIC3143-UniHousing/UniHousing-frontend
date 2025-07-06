@@ -1,5 +1,3 @@
-import { Link } from "react-router";
-
 import SimpleViewTitle from "../../components/SimpleViewTitle/SimpleViewTitle";
 
 function NotFound(){
@@ -12,7 +10,7 @@ function NotFound(){
                 className="rounded-xl"
             ></img>
             </div>
-            <section className='sm:w-1/2 flex items-center justify-center bg-white'> {/*  */}
+            <section className='sm:w-1/2 flex items-center justify-center bg-white'>
                 <div className="w-8/10 max-w-[600px]">
                     <SimpleViewTitle
                         title="Oops..."
@@ -20,12 +18,6 @@ function NotFound(){
                     />
                     <div>
                         <p className="mb-5">La página que buscas no aparece dentro de nuestro sistema, revisa si la dirección es correcta o si tienes la sesión abierta.</p>
-                        {/* <p className="mb-5">Aquí hay algunos enlaces que te puedan ayudar:</p>
-                        <ul>
-                            <li><Link to='/' className='font-semibold hover:text-[#2563EB]'>Ir a inicio</Link></li>
-                            <Link to='/login' className='font-semibold hover:text-[#2563EB]'>Inicia Sesión</Link>
-                            <li><Link to='/signup' className='font-semibold hover:text-[#2563EB]'>Regístrate</Link></li>
-                        </ul> */}
                     </div>
                 </div>
             </section>

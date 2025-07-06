@@ -18,8 +18,8 @@ interface User {
     name: string;
     email: string;
     type: UserType;
-    createdAt: string; 
-    housing: any[];  
+    createdAt: string;
+    housing: any[];
 }
 
 interface Auth0LoginResponse {

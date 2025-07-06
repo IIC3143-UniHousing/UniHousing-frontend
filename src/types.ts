@@ -12,6 +12,8 @@ export type HousingData = {
   title: string;
   description: string;
   address: string;
+  latitude?: number;
+  longitude?: number;
   price: number;
   rooms: number;
   bathrooms: number;
@@ -21,4 +23,11 @@ export type HousingData = {
   createdAt: string;
   updatedAt: string;
   owner: OwnerData;
+  ownerId: number;
+};
+
+export type Filter = {
+    priceMin: number | undefined;
+    priceMax: number | undefined;
+    rooms: number | null;
 };

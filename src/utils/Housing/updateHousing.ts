@@ -28,6 +28,11 @@ const checkStringValues = (value: string, minValue = 5) => {
     return true
 }
 
+const checkHasImages = (value: string, minValue = 1) => {
+    if(!value || !(value.length > minValue)) return false
+    return true
+}
+
 const checkHasValidInfo = (data: any) => {
     if(!checkHasAllRequiredInfo(data)) return { success: false, message: "Debe ingresar todos los datos" };
 
@@ -39,6 +44,7 @@ const checkHasValidInfo = (data: any) => {
         {check: checkFloatValues(data.size),                failMessage: "Tamaño de la propiedad debe ser un número mayor a cero"},
         {check: checkIntegerValues(data.rooms),             failMessage: "Número de piezas debe ser un número mayor a cero y sin decimales"},
         {check: checkIntegerValues(data.bathrooms),         failMessage: "Número de baños debe ser un número mayor a cero y sin decimales"},
+        {check: checkHasImages(data.images),                 failMessage: "Debe haber al menos una imagen"},
     ]
 
     for (const {check, failMessage} of validations) {
@@ -50,7 +56,7 @@ const checkHasValidInfo = (data: any) => {
     return {success: true}
 }
 
-export const uploadHousingData = async (data: any | null) : Promise<UploadResult> => {
+export const updateHousingData = async (data: any | null, id: number) : Promise<UploadResult> => {
     const hasValidInfo = checkHasValidInfo(data);
     if(!(hasValidInfo.success)) return hasValidInfo;
 
@@ -61,16 +67,23 @@ export const uploadHousingData = async (data: any | null) : Promise<UploadResult
     }
 
     const user = getUser();
-    data.ownerId = user?.id;
+
+    const payload = { ...data };
+    delete payload.id;
+    delete payload.createdAt;
+    delete payload.updatedAt;
+    delete payload.owner;
+    payload.ownerId = user?.id;
+
 
     try{
-        const response = await fetch(`${BASE_URL}/api/housing`, {
-            method: "POST",
+        const response = await fetch(`${BASE_URL}/api/housing/${id}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`,
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(payload),
         });
 
         if (response.ok) {
