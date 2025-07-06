@@ -7,7 +7,7 @@ export const getUserData = async (): Promise<OwnerData> => {
     const token = getAccessToken();
     console.log("Token enviado:", token); 
 
-    const res = await fetch("http://localhost:3000/api/users/me", {
+    const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/users/me", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export const updateUserData = async (payload: { name: string; email: string}) =>
     const token = getAccessToken();
     const user = getUser();
 
-    const res = await fetch("http://localhost:3000/api/users/me", {
+    const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/users/me", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
