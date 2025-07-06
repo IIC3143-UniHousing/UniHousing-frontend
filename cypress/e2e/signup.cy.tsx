@@ -23,7 +23,7 @@ describe('SignupForm Interactions', () => {
   });
 
   it('should display a success message on successful signup (201 Created)', () => {
-    cy.intercept('POST', 'http://localhost:3000/api/signup', {
+    cy.intercept('POST', import.meta.env.VITE_BACKEND_URL + 'http://localhost:3000/api/signup', {
       statusCode: 201,
       body: { _id: 'user123', email: 'signup@example.com' },
     }).as('signupRequest');

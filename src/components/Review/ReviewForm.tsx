@@ -35,7 +35,7 @@ const ReviewForm = ({ userId, housingId, onSuccess }: Props) => {
 
     try {
       const token = getAccessToken();
-      const res = await fetch("http://localhost:3000/api/reviews", {
+      const res = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/reviews", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

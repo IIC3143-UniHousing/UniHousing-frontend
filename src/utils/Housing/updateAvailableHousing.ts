@@ -7,7 +7,7 @@ export const updateAvailableHousing = async (
     newAvailability: boolean
     ): Promise<HousingData> => {
     const token = getAccessToken();
-    const url = `http://localhost:3000/api/housing/${housing.id}`;
+    const url = import.meta.env.VITE_BACKEND_URL + `/api/housing/${housing.id}`;
 
     const { id, createdAt, updatedAt, owner, ...house } = housing;
 

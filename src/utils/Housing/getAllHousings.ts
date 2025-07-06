@@ -8,7 +8,7 @@ type HousingListApiResponse = {
 
 export const getAllHousings = async (onlyAvailable: boolean = true): Promise<HousingData[]> => {
     const token = getAccessToken();
-    let url = `http://localhost:3000/api/housing`;
+    let url = import.meta.env.VITE_BACKEND_URL + `/api/housing`;
     if (onlyAvailable) {
         url += `?available=true`;
     }
