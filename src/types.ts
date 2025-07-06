@@ -12,6 +12,8 @@ export type HousingData = {
   title: string;
   description: string;
   address: string;
+  latitude?: number;
+  longitude?: number;
   price: number;
   rooms: number;
   bathrooms: number;
