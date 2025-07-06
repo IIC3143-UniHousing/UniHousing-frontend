@@ -1,6 +1,6 @@
 import { getAccessToken } from "../../utils/auth/auth";
 import { getUser } from "../auth/user";
-const BASE_URL = "http://localhost:3000"
+const BASE_URL = import.meta.env.VITE_BACKEND_URL
 
 type UploadSuccess = { success: true; result?: any };
 type UploadError = { success: false; message?: string };
