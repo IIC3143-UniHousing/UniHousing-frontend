@@ -19,7 +19,6 @@ function HousingCreatedConfirmation(){
             navigate('/', { replace: true });
         }
         const fetchHousingData = async () => {
-            console.log(housingID)
             const isRecent = await getIfHousingWasRecentlyCreated(Number(housingID));
             if(!isRecent){
                 navigate('/', { replace: true });
