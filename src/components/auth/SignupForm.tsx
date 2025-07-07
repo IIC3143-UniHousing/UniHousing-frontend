@@ -51,7 +51,14 @@ const SignupForm = () => {
                 setSuccess('Registro Exitoso');
             } else {
                 console.log(data.error);
-                setError(data.error || 'Error al registrarse');
+                if (
+                    data.error === 'Ocurrió un error inesperado.' &&
+                    (!/[A-Z]/.test(formData.password) || !/[0-9]/.test(formData.password) || formData.password.length < 8)
+                ) {
+                    setError('La contraseña es demasiado débil. Debe contener al menos 8 caracteres, una mayúscula, un número y un símbolo.');
+                } else {
+                    setError(data.error || 'Error al registrarse');
+                }
             }
         } catch (err) {
             setError('Error al conectarse con el servidor.');
