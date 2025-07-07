@@ -15,7 +15,6 @@ function ImageUpload({prevImages, onFilesSelected} : {prevImages?: any, onFilesS
 
     const checkIfImage = (file: any) => {
         const isImage = file?.type?.startsWith("image/");
-        console.log(isImage)
         if (isImage) return true
         return false
     }
