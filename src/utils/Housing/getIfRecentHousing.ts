@@ -4,8 +4,6 @@ const BASE_URL = import.meta.env.VITE_BACKEND_URL
 export const getIfHousingWasRecentlyCreated = async ( id: number ) => {
     const token = getAccessToken();
 
-    console.log(`${BASE_URL}/api/housing/${id}/recent`)
-
     try {
         const response = await fetch(`${BASE_URL}/api/housing/${id}/recent`, {
             method: "GET",

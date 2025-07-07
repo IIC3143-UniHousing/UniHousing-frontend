@@ -33,7 +33,6 @@ function DashboardHousing(){
              try {
                 const housingData = await getHousingById(id);
                 setHousingInfo(housingData);
-                console.log(housingData)
             } catch (e: any) {
                 console.error(e);
                 if(e.status == 404) setNotFound(true)
